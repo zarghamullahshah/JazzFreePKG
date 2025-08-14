@@ -175,11 +175,38 @@
 
 
   
+<!-- Floating WhatsApp Button -->
+<a href="https://whatsapp.com/channel/0029Vb89vSMJpe8g92aWgt25" target="_blank" class="floating-whatsapp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+</a>
 
-  
+<style>
+  .floating-whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .floating-whatsapp img {
+    width: 35px;
+    height: 35px;
+  }
+  .floating-whatsapp:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  }
+</style>
 
-
-  
+    
 <script>
   const correctPassword = "imroz"; 
   const joinWhatsApp = document.getElementById('joinWhatsApp');
