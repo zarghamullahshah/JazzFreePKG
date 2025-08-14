@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Genz Earning Club</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafb; color: #1a202c;
+      overflow: hidden;
+    }
+    .modal-overlay {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff; padding: 40px 30px;
+      border-radius: 16px; max-width: 400px; text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-content h1 { font-size: 2rem; margin-bottom: 15px; color: #2d3748; }
+    .modal-content p { font-size: 1rem; color: #4a5568; margin-bottom: 20px; }
+    .btn {
+      display: inline-block; padding: 12px 24px;
+      font-size: 1rem; font-weight: 600;
+      color: #fff; background: #25D366;
+      border-radius: 50px; text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn:hover { background: #1ebe5d; transform: scale(1.05); }
+    #mainContent { display: none; padding: 80px 20px; text-align: center; overflow-y: auto; }
+    .pricing-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 60px 0; }
+    .plan-card {
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 280px; padding: 30px; display: flex; flex-direction: column;
+    }
+    .plan-card.popular { border: 2px solid #3182ce; }
+    .plan-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #2d3748; }
+    .plan-card .price { font-size: 1.75rem; font-weight: 700; color: #3182ce; margin-bottom: 15px; }
+    .plan-card ul { list-style: none; padding: 0; text-align: left; flex: 1; }
+    .plan-card ul li { margin-bottom: 8px; position: relative; padding-left: 20px; }
+    .plan-card ul li:before { content: "✓"; position: absolute; left: 0; color: #38a169; }
+    .plan-card .cta-btn {
+      margin-top: 20px; padding: 14px 0;
+      background: #3182ce; color: #fff;
+      border-radius: 30px; text-decoration: none; font-weight: 600;
+      transition: background 0.3s;
+    }
+    .plan-card .cta-btn:hover { background: #2b6cb0; }
+    .telegram-link {
+      margin-top: 40px; padding: 14px 28px;
+      background: #794BC4; color: #fff;
+      border-radius: 30px; text-decoration: none; font-size: 1rem;
+      font-weight: 500; transition: background 0.3s;
+    }
+    .telegram-link:hover { background: #6138ac; }
+    @media (max-width: 600px) {
+      .pricing-section { flex-direction: column; align-items: center; }
+    }
+    /* Password input styling */
+    .password-input {
+      width: 100%; padding: 10px;
+      border: 1px solid #ccc; border-radius: 6px;
+      margin-bottom: 10px; font-size: 1rem;
+    }
+    .toggle-btn {
+      background: none; border: none;
+      color: #3182ce; cursor: pointer;
+      font-size: 0.9rem; margin-bottom: 15px;
+    }
+    .error-text { color: red; font-size: 0.9rem; margin-bottom: 10px; display: none; }
+  </style>
+</head>
+<body>
+  <!-- Step 1: WhatsApp Join Modal -->
+  <div id="joinModal" class="modal-overlay">
+    <div class="modal-content">
+      <h1>Genz Earning Club</h1>
+      <p>Please activate your package by joining our WhatsApp channel to continue</p>
+      <a href="https://wa.me/YOUR_CHANNEL_NUMBER" target="_blank" class="btn" id="joinWhatsApp">Join on WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Step 2: Password Modal -->
+  <div id="passwordModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <h1>Enter Password</h1>
+      <p>Enter the access password to continue</p>
+      <input type="password" id="passwordField" class="password-input" placeholder="Enter password">
+      <button class="toggle-btn" type="button" onclick="togglePassword()">Show Password</button>
+      <div class="error-text" id="errorMsg">Incorrect password. Try again.</div>
+      <button class="btn" id="submitPassword">Submit</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Main Content -->
+  <div id="mainContent">
+    <h2>Choose Your Perfect Package</h2>
+    <div class="pricing-section">
+      <div class="plan-card">
+        <h3>Jazz Century Package</h3>
+        <div class="price">100 Days</div>
+        <ul>
+          <li>100 GB Data</li>
+          <li>6000 On-net mins & SMS</li>
+          <li>Daily: 1 GB + 60 mins/SMS</li>
+        </ul>
+        <a href="https://wa.me/YOUR_CHANNEL_NUMBER" class="cta-btn">Activate Now</a>
+      </div>
+      <div class="plan-card popular">
+        <h3>Yearly FanPlus Offer</h3>
+        <div class="price">1 Year</div>
+        <ul>
+          <li>100 GB Data (50 GB streaming)</li>
+          <li>1000 On-net mins & SMS</li>
+          <li>500 Other-network mins</li>
+        </ul>
+        <a href="https://wa.me/YOUR_CHANNEL_NUMBER" class="cta-btn">Activate Now</a>
+      </div>
+      <div class="plan-card">
+        <h3>Weekly FanPlus Offer</h3>
+        <div class="price">1 Week</div>
+        <ul>
+          <li>100 GB Data (50 GB streaming)</li>
+          <li>1000 On-net mins & SMS</li>
+          <li>500 Other-network mins</li>
+        </ul>
+        <a href="https://wa.me/YOUR_CHANNEL_NUMBER" class="cta-btn">Activate Now</a>
+      </div>
+    </div>
+    <a href="https://t.me/Jazz_Free_Mbs_bot" target="_blank" class="telegram-link">Activate via Telegram</a>
+  </div>
+
+  <script>
+    const correctPassword = "zain"; // Change password here
+    const joinWhatsApp = document.getElementById('joinWhatsApp');
+    const joinModal = document.getElementById('joinModal');
+    const passwordModal = document.getElementById('passwordModal');
+    const mainContent = document.getElementById('mainContent');
+    const passwordField = document.getElementById('passwordField');
+    const errorMsg = document.getElementById('errorMsg');
+
+    joinWhatsApp.addEventListener('click', () => {
+      joinModal.style.display = 'none';
+      passwordModal.style.display = 'flex';
+    });
+
+    document.getElementById('submitPassword').addEventListener('click', () => {
+      if (passwordField.value.trim() === correctPassword) {
+        passwordModal.style.display = 'none';
+        mainContent.style.display = 'block';
+        document.body.style.overflow = 'auto';
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    });
+
+    function togglePassword() {
+      const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+      passwordField.setAttribute("type", type);
+      event.target.textContent = type === "password" ? "Show Password" : "Hide Password";
+    }
+  </script>
+</body>
+</html>
